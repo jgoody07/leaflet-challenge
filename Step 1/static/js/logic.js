@@ -80,36 +80,27 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     }
   }).addTo(myMap);
 
-  // Create a legend control object.
-  var legend = L.control({
-    position: "bottomright"
-  });
+
+// Set up the legend
+// Create a legend control object.
+var legend = L.control({ 
+  position: "bottomright" 
+});
   // Details for the legend
-  legend.onAdd = function() {
-    var div = L.DomUtil.create("div", "info legend");
-    var mag = [-10, 10, 30, 50, 70, 90];
-    var colors = [
-      "#98ee00",
-      "#d4ee00",
-      "#eecc00",
-      "#ee9c00",
-      "#ea822c",
-      "#ea2c2c"
-    ];
+  legend.onAdd = function() { var div = L.DomUtil.create('div', 'info legend') 
+  div.innerHTML = "<table style= 'background-color: white'><tr><td colspan='2' ><h3>&nbsp;&nbsp;Depth </h3></td></tr>"+
+                "<tr><td><10</td><td style= 'background-color: #98ee00'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>"+
+                "<tr><td>10-30</td><td style= 'background-color: #d4ee00'></td></tr>"+
+                "<tr><td>30-50</td><td style= 'background-color: #eecc00'></td></tr>"+
+                "<tr><td>50-70</td><td style= 'background-color: #ee9c00'></td></tr>"+
+                "<tr><td>70-90</td><td style= 'background-color: #ea822c'></td></tr>"+
+                "<tr><td>>90</td><td style= 'background-color: #ea2c2c'></td></tr>"+
+                "</table>";
 
-    // Loop through our intervals and generate a label with a colored square for each interval.
-    for (var i = 0; i < mag.length; i++) {
-      div.innerHTML += "<i style='background:"
-        + colors[i]
-        + "'></i> "
-        + mag[i]
-        + (mag[i + 1] ? "&ndash;" + mag[i + 1] + "<br>" : "+");
-    }
-    return div;
-  };
-  
-  // Add legend to the map.
-  legend.addTo(myMap);
+return div;
+};
+// Add legend to the map.
+legend.addTo(myMap);
 
-  });
+});
 
