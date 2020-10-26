@@ -134,7 +134,21 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
   earthquakes.addTo(myMap);
 
 
-  // Set up the legend
+// retrive Tectonic Plate geoJSON data.
+d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(data => {
+// Adding our geoJSON data, along with style information, to the tectonicplates layer.
+    L.geoJson(data, {
+        color: "orange",
+        weight: 2
+      })
+      // We add the data to the techplate layer instead of directly to the map
+      .addTo(techplates);
+      // Then add the techplates layer to the map.
+      techplates.addTo(myMap);
+    
+ });
+
+// Set up the legend
 // Create a legend control object.
 var legend = L.control({ 
     position: "bottomright" 
@@ -157,18 +171,4 @@ var legend = L.control({
   
   });
   
- // retrive Tectonic Plate geoJSON data.
- d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(data => {
-    function plateData() {
-
-   L.geoJson(plateData, {
-     color: "orange",
-     weight: 2
-   })
-   .addTo(techplates);
-
-   // add the tectonicplates layer to the map.
-   techplates.addTo(myMap);
- };
-}); 
 
