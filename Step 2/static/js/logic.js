@@ -158,10 +158,10 @@ var legend = L.control({
   });
   
  // retrive Tectonic Plate geoJSON data.
- d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json",
- function(platedata) {
+ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(data => {
+    function plateData() {
 
-   L.geoJson(platedata, {
+   L.geoJson(plateData, {
      color: "orange",
      weight: 2
    })
@@ -169,5 +169,6 @@ var legend = L.control({
 
    // add the tectonicplates layer to the map.
    techplates.addTo(myMap);
- });
+ };
+}); 
 
